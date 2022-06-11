@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:P="http://www.springframework.org/schema/p" xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean class="com.f434.User" id="user">
+
+        <description>用来描述bean是用来干啥的</description>
+    </bean>
+<!--  使用name也可以设置别名
+      使用空格 或 , 或 ; 设置多个别名-->
+    <bean class="com.f434.User" id="user2" name="name01 name02 name03,mane04;name05"></bean>
+
+<!--    使用import可以导入其他spring的xml配置文件-->
+<!--    <import resource="spring_ioc.xml"></import>  -->
+
+
+<!--  设置bean的别名 -->
+    <alias name="user2" alias="substitute_user2"></alias>
+
+<!--********************************************依赖注入 Begin*************************************************************-->
+<!--基于Setter依赖注入
+对应其Set方法    setId -> name="id"   setXXX -> name="XXX"-->
+    <bean class="com.f434.User" id="user3">
+        <property name="id" value="01"></property>
+        <property name="realName" value="王刚"></property>
+        <property name="userName" value="张三"></property>
+    </bean>
+
+
+<!--基于构造函数的依赖注入
+    1.基于name属性!!!!!!!!
+    2.基于index (可以只有value属性  如果省略name属性,一定要注意参数的顺序 ,如果顺序错乱,可以使用name属性)
+    3.使用index设置下标(从0开始) index="0"
+    4.通过type属性 (错乱的相同的参数类型不推荐使用) type="String"
+-->
+    <bean class="com.f434.User" id="user4">
+        <constructor-arg name="id" value="2"></constructor-arg>
+        <constructor-arg name="realName" value="吴彦祖"></constructor-arg>
+        <constructor-arg name="userName" value="小吴"></constructor-arg>
+    </bean>
+
+
+<!--    复杂类型依赖注入-->
+    <bean class="com.f434.Person" id="person">
+        <property name="id" value="1"></property>
+        <property name="name" >
+            <null></null>
+        </property>
+
+        <property name="gender" value=""></property>
+<!--        ref 引用外部bean
+        <property name="girl" ref="girl"></property>
+        -->
+
+<!--        使用内部bean 来依赖注入其他bean-->
+        <property name="girl">
+
+            <bean class="com.f434.Girl" >
+                <property name="name" value="晓芳"></property>
+                <property name="age" value="20"></property>
+            </bean>
+<!--            <bean class="com.f434.Girl" P:age="23" P:name="小花"></bean>-->
+        </property>
+        <property name="hobbies">
+            <list>
+<!--                泛型是基本数据类型用<value></value>
+                    泛型是bean(即对象)就要使用  <bean></bean>
+                       -->
+                <value>篮球</value>
+                <value>羽毛球</value>
+                <value>乒乓球</value>
+                <value>排球</value>
+                <value>游泳</value>
+                <value>写bug</value>
+
+            </list>
+        </property>
+        <property name="course">
+            <map>
+                <!--value是基本数据类型用 <entry key="" value=""></entry>
+                    value是bean(即对象)就要使用  <entry value-ref=""></entry> (直接引用bean)   -->
+
+                <entry key="1" value="语文"></entry>
+                <entry key="2" value="数学"></entry>
+                <entry key="3" value="英语"></entry>
+                <entry key="4" value="历史"></entry>
+                <entry key="5" ><null></null></entry>
+
+            </map>
+        </property>
+
+    </bean>
+
+    <bean class="com.f434.Test01" id="test01">
+        <property name="users">
+            <list>
+                <bean class="com.f434.User">
+                    <property name="id" value=""></property>
+                    <property name="userName" value="zhangsan"></property>
+                    <property name="realName" value="lisi"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+
+
+
+<!--    使用P:命名空间来简化基于setter属性注入xml配置 支持基本数据类型,引用外部bean(对象) (不支持复杂类型,比如集合还是要用<property>)-->
+    <bean class="com.f434.Girl" id="girl" P:age="23" P:name="小花">
+
+    </bean>
+
+    <bean class="com.f434.Person" id="person2" P:girl-ref="girl2">
+        <property name="hobbies">
+            <value>炼金术</value>
+        </property>
+    </bean>
+
+<!--   使用C:命名空间来简化基于构造方法注入xml配置 -->
+    <bean class="com.f434.Girl" id="girl2" c:name="小杨" c:age="18"></bean>
+
+
+
+
+
+
+
+    <!--********************************************依赖注入 End*************************************************************-->
+
+
+</beans>

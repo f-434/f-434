@@ -1,5 +1,6 @@
 package com.f434.tests;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.f434.Girl;
 import com.f434.Person;
 import org.junit.Before;
@@ -96,10 +97,12 @@ public class IocHTest {
 
     /**
      * 生命周期回调
-     * 1.使用接口方式回调
+     * 1.使用接口方式回调 (先调用使用接口回调生命周期的方式)
      *      1.初始化回调 实现InitializingBean 重写  afterPropertiesSet()
      *      2.销毁回调 实现DisposableBean 重写  destroy()
      *
+     * 2.配置bean 实现生命周期的回调
+     *      1. init-method="init" destory-method="destory"
      *
      * */
 
@@ -109,7 +112,26 @@ public class IocHTest {
 
         System.out.println(bean);
 //        ClassPathXmlApplicationContext 下的close方法
-        ioc.close();
+//        ioc.close();
+
+
+    }
+    @Test
+    public void test08(){
+        DruidDataSource person = ioc.getBean("dataSource", DruidDataSource.class);
+        System.out.println(person);
+    }
+
+
+    /**
+     *
+     * spel表达式
+     *
+     * */
+    @Test
+    public void test09(){
+        Person bean = ioc.getBean("person2", Person.class); //new Person();
+        System.out.println(bean);
 
 
 

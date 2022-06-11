@@ -118,13 +118,13 @@
     <bean class="com.f434.Person" id="person2">
 <!--        运算表达式-->
         <property name="id" value="#{17 + 3}"></property>
-<!--        应用外部bean-->
+<!--        -->
         <property name="girl" value="#{girl2}"></property>
-<!--        调用bean的属性-->
+<!--        -->
         <property name="name" value="#{girl2.name}"></property>
-<!--        调用bean的方法-->
+<!--        -->
         <property name="gender" value="#{girl2.getName()}"></property>
-<!--        调用bean的静态方法-->
+<!--        静态方法-->
         <property name="birthday" value="#{T(com.f434.PersonFactory).now}"></property>
     </bean>
 

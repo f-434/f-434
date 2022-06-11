@@ -113,4 +113,14 @@ public class Person implements InitializingBean , DisposableBean {
         System.out.println("Person对象销毁");
 
     }
+
+
+//    ____________________________________________________
+    public void personFactoryByinit(){
+        System.out.println("实例化Person");
+    }
+
+    public  void personFactoryByddestory(){
+        System.out.println("Person对象销毁");
+    }
 }
