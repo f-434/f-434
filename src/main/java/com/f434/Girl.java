@@ -4,10 +4,7 @@ public class Girl {
     private String name;
     private Integer age;
 
-    public Girl(String name, Integer age) {
-        this.name = name;
-        this.age = age;
-    }
+//    public Girl() {}
 
     public String getName() {
         return name;
@@ -18,6 +15,13 @@ public class Girl {
     }
 
     public Girl() {
+
+        System.out.println("Girl已加载");
+    }
+
+    public Girl(String name, Integer age) {
+        this.name = name;
+        this.age = age;
     }
 
     public Integer getAge() {

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+<!--控制bean的加载顺序 , 当一个bean想让另一个bean在他之前加载可以设置depends-on   -->
+<!--depends-on="girl" person的加载取决于girl(依赖于girl)-->
+
+<!--    <bean class="com.f434.Person" id="person" depends-on="girl"></bean>-->
+<!--    <bean class="com.f434.Girl" id="girl"></bean>-->
+<!--    -->
+
+
+
+<!--    懒加载 lazy-init="true"
+        不会在spring容器加载的时候 加载该bean
+        而是在使用的时候才会加载该bean-->
+<!--    <bean class="com.f434.Girl" id="girl" lazy-init="true"></bean>-->
+
+
+
+
+
+<!--作用域
+        1.单例  scope="singleton"  默认值(同一个id始终只会创建一个)
+        2.多例  scope="prototype"  (原型)每一次使用都会创建一个bean-->
+<!--    <bean class="com.f434.Person" id="person" scope="prototype"></bean>-->
+
+
+
+
+
+
+<!--   使用静态工厂方法来实例化bean -->
+    <bean class="com.f434.Person" id="person" factory-method="createPersonFactory"></bean>
+
+
+
+
+
+<!--    使用实例工厂方法来实例化bean-->
+
+<!--    <bean class="com.f434.PersonFactory" id="personFactory"></bean>-->
+<!--    <bean class="com.f434.Person" id="person" factory-bean="personFactory" factory-method="craetPersonFactory"></bean>-->
+
+
+<!--    自动注入-->
+<!--            1.byType 根据类型去自动匹配  当出现多个类型或者匹配到多个类型都会报错-->
+<!--            2.byName 根据set方法的名字去自动匹配
+                3.constructor 根据构造器去匹配 (优先会根据名字去匹配 ,假如名字没有匹配到,会根据参数类型去匹配)
+                        会根据构造参数完整的匹配注入; 如果构造函数Person(Girl girl3 , User user) ioc容器必须要同时有Girl 和 user
+                        名字没有匹配到会根据类型匹配,类型假如出现多个会注入失败但是不会报错,将会默认调用构造函数
+
+
+                        当根据类型匹配到多个 可以使用     1.设置某个bean为主要bean -> primary="true"
+                                                     2.将某个bean设置为不参与bean -> autowire-candidate="false"  忽略自动注入
+                            -->
+<!--    <bean class="com.f434.Person" id="person" autowire="constructor"></bean>-->
+
+<!--    <bean class="com.f434.Girl" id="girl" autowire-candidate="false">-->
+<!--        <property name="name" value="晓芳"></property>-->
+<!--        <property name="age" value="18"></property>-->
+
+<!--    </bean>-->
+
+<!--    <bean class="com.f434.Girl" id="girl2">-->
+<!--        <property name="name" value="小慧"></property>-->
+<!--        <property name="age" value="18"></property>-->
+
+<!--    </bean>-->
+<!--    <bean class="com.f434.User" id="user"></bean>-->
+
+
+<!--    <bean class="com.f434.Girl" id="girl2">-->
+<!--        <property name="name" value="小慧"></property>-->
+<!--        <property name="age" value="20"></property>-->
+
+<!--    </bean>-->
+
+
+
+<!--    生命周期回调-->
+<!--    <bean class="com.f434.Person" id="person"></bean>-->
+
+
+</beans>

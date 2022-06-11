@@ -1,10 +1,14 @@
 package com.f434;
 
+import javafx.fxml.Initializable;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-public class Person {
+public class Person implements InitializingBean , DisposableBean {
     private Integer id;
     private String name;
     private String gender;
@@ -12,6 +16,10 @@ public class Person {
     private List<String> hobbies;
     private Map<Integer ,String> course;//课程
     private Girl girl;
+
+    public Person() {
+        System.out.println("Persion已加载");
+    }
 
     public Integer getId() {
         return id;
@@ -80,5 +88,29 @@ public class Person {
                 ", course=" + course +
                 ", girl=" + girl +
                 '}';
+    }
+
+
+    public Person(Girl girl3) {
+        this.girl = girl3;
+    }
+
+
+
+//    使用静态工厂方法来实例化bean
+    public static Person createPersonFactory(){
+        Child child = new Child();
+        child.setName("儿子");
+        return child;
+
+    }
+
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("实例化Person");
+    }
+
+    public void destroy() throws Exception {
+        System.out.println("Person对象销毁");
+
     }
 }

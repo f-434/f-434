@@ -2,6 +2,7 @@ package com.f434.tests;
 
 
 import com.f434.Person;
+import com.f434.Test01;
 import com.f434.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -105,5 +106,20 @@ public class IocTest {
         Person bean = ioc.getBean("person2", Person.class);
 
         System.out.println(bean);
+    }
+
+
+    /**
+     * 泛型是基本数据类型用<value></value>
+     * 泛型是bean(即对象)就要使用  <bean></bean>
+     *
+     */
+    @Test
+    public void test07(){
+        System.out.println("spring容器已加载");
+
+        Test01 test01 = ioc.getBean("test01",Test01.class);
+
+        System.out.println(test01);
     }
 }

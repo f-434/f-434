@@ -94,6 +94,18 @@
 
     </bean>
 
+    <bean class="com.f434.Test01" id="test01">
+        <property name="users">
+            <list>
+                <bean class="com.f434.User">
+                    <property name="id" value=""></property>
+                    <property name="userName" value="zhangsan"></property>
+                    <property name="realName" value="lisi"></property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
 
 
 
